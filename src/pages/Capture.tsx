@@ -177,7 +177,7 @@ const Capture = () => {
         <div className="flex flex-col gap-2 w-full md:-me-10 md:max-w-screen-md">
           <input
             type="text"
-            placeholder="Name *"
+            placeholder="Nombre *"
             value={prospect.name}
             maxLength={100}
             onChange={handleInputChange("name")}

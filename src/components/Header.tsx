@@ -61,7 +61,7 @@ const Header = () => {
       </div>
       <div
         className={`menu ${
-          isMenuOpen ? "open" : "-mb-20"
+          isMenuOpen ? "open" : "-mb-20 hidden"
         } flex md:hidden w-full h-max justify-center items-center flex-col gap-8 p-12`}
       >
         {/* Menu Mobile */}
