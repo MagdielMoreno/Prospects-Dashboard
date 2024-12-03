@@ -42,17 +42,20 @@ const Header = () => {
               </a>
             ))}
           </div>
-          <h1 className="flex md:hidden font-medium text-2xl">{currentPage}</h1>
-          <div className="flex md:hidden">
-            {/* Menu Button */}
-            <Icon
-              icon="keyboard_arrow_down"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`transition-all ease-in-out hover:scale-105 duration-400 h-8 w-8 content-center cursor-pointer text-foreground-1 ${
-                isMenuOpen ? "rotate-180" : "-mt-1"
-              }`}
-              style={{ fontSize: "36px" }}
-            />
+          <div className="flex flex-row gap-1 cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <h1 className="flex md:hidden font-medium text-2xl">
+              {currentPage}
+            </h1>
+            <div className="flex md:hidden">
+              {/* Menu Button */}
+              <Icon
+                icon="keyboard_arrow_down"
+                className={`transition-all ease-in-out hover:scale-105 duration-400 h-8 w-8 content-center cursor-pointer text-foreground-1 self-center ${
+                  isMenuOpen ? "rotate-180" : "-mt-1"
+                }`}
+                style={{ fontSize: "36px" }}
+              />
+            </div>
           </div>
         </div>
       </div>
