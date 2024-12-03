@@ -1,4 +1,3 @@
-import Icon from "@/components/Icon";
 import axios from "axios";
 import { Doc } from "./Document";
 

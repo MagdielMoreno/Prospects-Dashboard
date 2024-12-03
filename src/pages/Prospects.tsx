@@ -1,28 +1,19 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/Icon";
 import {
-  DefaultProspect,
   getAllProspects,
   getProspectDocuments,
   Prospect,
 } from "@/models/Prospect";
-import LayoutPopup from "@/components/LayoutPopup";
 import Loading from "@/components/Loading";
 import { AnimatePresence, motion } from "framer-motion";
-import Popup from "@/components/Popup";
 import { Doc } from "@/models/Document";
 
 const Prospects = () => {
   const [prospects, setProspects] = useState<Prospect[]>([]);
-  const [currentProspect, setCurrentProspect] =
-    useState<Prospect>(DefaultProspect);
-
-  const [selectedImage, setSelectedFile] = useState<File | null>(null);
-  const [showImageError, setShowImageError] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const filteredProspects = prospects.filter(
     (prospect) =>
