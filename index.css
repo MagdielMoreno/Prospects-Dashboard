@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font */
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Smooth Transitions */
+*,
+*::before,
+*::after {
+  transition: 
+    color 400ms ease-in-out,
+    background-color 400ms ease-in-out,
+    border-color 400ms ease-in-out,
+    fill 400ms ease-in-out,
+    stroke 400ms ease-in-out,
+    opacity 400ms ease-in-out;
+}
+
+/* Hide Scrollbars */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  overflow: auto;
+}
+
+/* Autofill Color Fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}

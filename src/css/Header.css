@@ -1,0 +1,25 @@
+.menu {
+  max-height: 0; /* Inicialmente colapsado */
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.75s ease, opacity 0.75s ease;
+}
+
+.menu.open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.menu-item {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  transition: background-color 1s ease;
+}
+
+.menu-item:hover {
+  background-color: #e0e0e0;
+}

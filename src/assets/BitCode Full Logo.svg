@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="800mm"
+   height="150mm"
+   viewBox="0 0 800 150"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="BitCode Full Logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.25606581"
+     inkscape:cx="1189.1475"
+     inkscape:cy="501.82413"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:214.647px;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:2.23594;stroke-dasharray:none"
+       x="27.089808"
+       y="138.87819"
+       id="text1"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:214.647px;font-family:'Newton Howard Font';-inkscape-font-specification:'Newton Howard Font';fill:#ffffff;fill-opacity:1;stroke-width:2.23594;stroke-dasharray:none"
+         x="27.089808"
+         y="138.87819"
+         id="tspan2">BITC  DE</tspan></text>
+    <path
+       id="rect3"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:15.6349;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="M 466.78754,3.7892908 403.5624,58.245671 458.73394,105.76542 V 85.395248 L 428.42439,58.24575 466.78754,23.8821 505.15069,58.24575 474.84114,85.395248 v 20.370172 l 55.17154,-47.519749 z" />
+    <path
+       id="rect3-7"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:15.6349;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 466.78754,38.131014 -21.67447,18.668429 11.61513,10.435099 10.05934,-9.010633 10.05951,9.010805 11.62324,-10.428155 z m -31.02735,26.724108 -32.19779,27.732274 55.17154,47.519494 v -20.36992 l -0.0174,-0.0156 V 86.568375 h -12.24319 v 22.186265 l -18.049,-16.167202 19.13042,-17.135901 z m 62.06381,0.008 -11.80286,10.589257 19.12955,17.135155 -18.07722,16.192526 V 91.882594 H 474.83033 V 128.943 h 0.0108 v 11.16391 l 55.17155,-47.519493 z" />
+  </g>
+</svg>
