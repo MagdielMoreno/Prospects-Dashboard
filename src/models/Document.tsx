@@ -3,4 +3,5 @@ export interface Doc {
   prospectId: number;
   name: string;
   document: File;
+  docName: string;
 }

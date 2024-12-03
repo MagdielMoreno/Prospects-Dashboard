@@ -4,10 +4,6 @@ const menu = [
     route: "/",
   },
   {
-    name: "Evaluación",
-    route: "/evaluations",
-  },
-  {
     name: "Captura",
     route: "/capture",
   },

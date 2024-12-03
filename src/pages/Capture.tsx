@@ -1,16 +1,29 @@
 import Icon from "@/components/Icon";
 import Loading from "@/components/Loading";
 import Popup from "@/components/Popup";
+import YesNoPopup from "@/components/YesNoPopup";
 import { Doc } from "@/models/Document";
-import { addProspect, DefaultProspect, Prospect, uploadFiles } from "@/models/Prospect";
+import {
+  addProspect,
+  DefaultProspect,
+  Prospect,
+  statuses,
+  uploadFiles,
+} from "@/models/Prospect";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Capture = () => {
   const [prospect, setProspect] = useState<Prospect>(DefaultProspect);
   const [documents, setDocuments] = useState<Doc[]>([]);
   const [showFileError, setShowFileError] = useState(false);
   const [showEmptyError, setShowEmptyError] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showExitWarning, setShowExitWarning] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const getNextId = () => {
     return documents.length > 0
@@ -21,7 +34,7 @@ const Capture = () => {
   const handleFileAdd = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file && file.size > 10 * 1024 * 1024) {
+    if (file && file.size > 4 * 1024 * 1024) {
       setShowFileError(true);
     } else {
       setShowFileError(false);
@@ -32,6 +45,7 @@ const Capture = () => {
           prospectId: 0,
           name: file.name,
           document: file,
+          docName: file.name,
         };
 
         setDocuments((prevDocuments) => [...prevDocuments, newDocument]);
@@ -77,20 +91,51 @@ const Capture = () => {
   };
 
   const handleSaveProspect = async () => {
-    if (prospect.name || prospect.lastName || prospect.phone) {
+    if (
+      prospect.name.length > 0 &&
+      prospect.lastName.length > 0 &&
+      prospect.phone.length > 0
+    ) {
+      if (documents.length > 0) {
+        for (const document of documents) {
+          if (document.name.length === 0) {
+            setShowEmptyError(true);
+            return;
+          }
+        }
+      }
+
       setShowEmptyError(false);
       setIsLoading(true);
 
       const addedProspect = await addProspect(prospect);
 
       if (addedProspect && documents.length > 0) {
-          await uploadFiles(addedProspect.id, documents);
+        await uploadFiles(addedProspect.id, documents);
       }
+
+      setDocuments([]);
       setProspect(DefaultProspect);
       setIsLoading(false);
+      setShowSuccessPopup(true);
     } else {
       setShowEmptyError(true);
     }
+  };
+
+  const handleRoleDropDown = (status: number) => {
+    setProspect((prevState) => ({
+      ...prevState,
+      ["status"]: status,
+    }));
+    setIsDropDownOpen(false);
+  };
+
+  const handleExit = () => {
+    setShowExitWarning(false);
+    setDocuments([]);
+    setProspect(DefaultProspect);
+    navigate("/");
   };
 
   return (
@@ -134,7 +179,7 @@ const Capture = () => {
             type="text"
             placeholder="Name *"
             value={prospect.name}
-            maxLength={50}
+            maxLength={100}
             onChange={handleInputChange("name")}
             className="w-full px-4 py-3 rounded-xl bg-background-2 placeholder:text-foreground-4 outline-none"
           />
@@ -142,14 +187,14 @@ const Capture = () => {
             type="text"
             placeholder="Primer Apellido *"
             value={prospect.lastName}
-            maxLength={50}
+            maxLength={100}
             onChange={handleInputChange("lastName")}
             className="w-full px-4 py-3 rounded-xl bg-background-2 placeholder:text-foreground-4 outline-none"
           />
           <input
             type="text"
             placeholder="Segundo Apellido"
-            maxLength={50}
+            maxLength={100}
             value={prospect.secondLastName}
             onChange={handleInputChange("secondLastName")}
             className="w-full px-4 py-3 rounded-xl bg-background-2 placeholder:text-foreground-4 outline-none"
@@ -162,6 +207,53 @@ const Capture = () => {
             onChange={handleInputChange("phone")}
             className="w-full px-4 py-3 rounded-xl bg-background-2 placeholder:text-foreground-4 outline-none"
           />
+
+          {/* Dropdown Status */}
+          <button
+            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+            className={`${
+              statuses.find((status) => status.id === prospect.status)?.id === 1
+                ? "bg-primary-1"
+                : statuses.find((status) => status.id === prospect.status)
+                      ?.id === 2
+                  ? "bg-green-700"
+                  : statuses.find((status) => status.id === prospect.status)
+                        ?.id === 3
+                    ? "bg-red-500"
+                    : "bg-background-2"
+            } font-medium rounded-xl px-4 py-3 text-center flex items-center flex-row gap-1`}
+            type="button"
+          >
+            {statuses.find((status) => status.id === prospect.status)?.name}
+            <Icon icon="keyboard_arrow_down" />
+          </button>
+          <div
+            className={`${isDropDownOpen ? "visible" : "hidden"} z-10 bg-background-2 rounded-xl shadow w-44`}
+          >
+            <ul className="text-s flex flex-col gap-1">
+              {statuses.map((status) => (
+                <li
+                  key={status.id}
+                  className="flex flex-row px-4 py-2 cursor-pointer"
+                  onClick={() => handleRoleDropDown(status.id)}
+                >
+                  <span
+                    className={`px-2 rounded-xl hover:cursor-pointer flex flex-row w-full items-center justify-center ${
+                      status.id === 1
+                        ? "bg-primary-1"
+                        : status.id === 2
+                          ? "bg-green-700"
+                          : status.id === 3
+                            ? "bg-red-500"
+                            : ""
+                    }`}
+                  >
+                    {status.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -178,7 +270,20 @@ const Capture = () => {
               style={{ fontSize: "20px" }}
             />
             <span className="text-foreground-4 text-sm font-medium">
-              {document.name}
+              <input
+                type="text"
+                className="bg-background-4 py-1 rounded-lg px-3 outline-none"
+                value={document.name}
+                onChange={(e) => {
+                  setDocuments((prevDocuments) =>
+                    prevDocuments.map((doc) =>
+                      doc.id === document.id
+                        ? { ...doc, name: e.target.value }
+                        : doc
+                    )
+                  );
+                }}
+              />
             </span>
             <button onClick={() => handleRemoveFile(document)}>
               <Icon
@@ -191,13 +296,43 @@ const Capture = () => {
         ))}
       </div>
 
-      {/* Save Button */}
-      <button
-        className="bg-primary-1 px-4 py-2 rounded-xl max-w-fit self-center"
-        onClick={handleSaveProspect}
-      >
-        Guardar
-      </button>
+      <div className="flex flex-row gap-4 justify-center">
+        {/* Exit Button */}
+        <button
+          className="bg-background-1 px-4 py-2 rounded-xl max-w-fit self-center"
+          onClick={() => setShowExitWarning(true)}
+        >
+          Salir
+        </button>
+
+        {/* Save Button */}
+        <button
+          className="bg-primary-1 px-4 py-2 rounded-xl max-w-fit self-center"
+          onClick={handleSaveProspect}
+        >
+          Guardar
+        </button>
+      </div>
+
+      {/* Exit Warning */}
+      <YesNoPopup
+        title="Alerta"
+        visible={showExitWarning}
+        message="Si sales se perdera toda la informacion agregada"
+        icon="info"
+        onConfirm={handleExit}
+        onCancel={() => setShowExitWarning(false)}
+      />
+
+      {/* Saved Prospect Popup */}
+      <Popup
+        title="Correcto"
+        visible={showSuccessPopup}
+        message="Prospecto guardado correctamente"
+        icon="check"
+        onConfirm={() => setShowSuccessPopup(false)}
+        onCancel={() => setShowSuccessPopup(false)}
+      />
 
       {/* Empty Fields Error */}
       <Popup
@@ -213,7 +348,7 @@ const Capture = () => {
       <Popup
         title="Error"
         visible={showFileError}
-        message="File should be 10MB or less"
+        message="File should be 4MB or less"
         icon="error"
         onConfirm={() => setShowFileError(false)}
         onCancel={() => setShowFileError(false)}

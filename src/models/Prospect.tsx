@@ -12,6 +12,7 @@ export interface Prospect {
   phone: string;
   status: number;
   hasDocuments: boolean;
+  observations: string;
 }
 
 export const DefaultProspect: Prospect = {
@@ -21,8 +22,15 @@ export const DefaultProspect: Prospect = {
   secondLastName: "",
   phone: "",
   status: 1,
-  hasDocuments: false
+  hasDocuments: false,
+  observations: ""
 };
+
+export const statuses = [
+  { id: 1, name: "Enviado" },
+  { id: 2, name: "Autorizado" },
+  { id: 3, name: "Rechazado" }
+]
 
 export const getAllProspects = async () => {
   try {
@@ -45,6 +53,7 @@ export const uploadFiles = async (id: number, files: Doc[]) => {
     formData.append("id", id.toString());
     formData.append("name", file.name);
     formData.append("document", file.document);
+    formData.append("docName", file.docName);
 
     try {
       await axios.post(`${BASE_URL}/prospects/upload`, formData, {

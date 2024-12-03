@@ -61,7 +61,7 @@ const LayoutPopup: React.FC<PopupProps> = ({
               onClick={onCancel}
             />
           </div>
-          <div className="sm:flex sm:items-start md:m-4 m-2">
+          <div className="sm:flex sm:items-start md:m-4 m-2 justify-center md:pe-14">
             <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-foreground-1 sm:mx-0 sm:h-10 sm:w-10">
               <Icon
                 icon={icon}
@@ -76,7 +76,7 @@ const LayoutPopup: React.FC<PopupProps> = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row-reverse mt-5 gap-2 md:gap-0">
+          <div className="flex flex-col md:flex-row justify-center mt-5 gap-2 md:gap-0">
             <button
               type="button"
               data-behavior="commit"
