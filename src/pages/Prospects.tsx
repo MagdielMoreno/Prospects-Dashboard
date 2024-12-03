@@ -31,9 +31,6 @@ const Prospects = () => {
     (prospect) =>
       prospect.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       prospect.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      prospect.secondLastName
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
       prospect.phone.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
